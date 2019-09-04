@@ -1,93 +1,131 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Helmets from "./helmets.json";
-import Header from "./components/Header";
-import { throwStatement } from '@babel/types';
-import GameBoard from "./components/GameBoard"
-import ResultPanel from "./components/ResultPanel"
+import React, { Component } from "react";
+import MatchCard from "./components/MatchCard";
+import Wrapper from "./components/Wrapper";
+import Title from "./components/Title";
+import matches from "./helmets.json";
+import "./App.css";
 
-const shuffleArray = array => {
-
-  for (let i = array.length - 1; i > 0; i--) {
-
-    let randomIdx = Math.floor(Math.random() * (i + 1))
-    let randomValue = array[randomIdx]
-
-    array[randomIdx] = array[i]
-    array[i] = randomValue
-
-  }
-
-  return array;
-
-}
+let correctGuesses = 0;
+let bestScore = 0;
+let clickMessage = "Click on a team's football helmet to gain points! Click on the same one twice and you lose!";
 
 class App extends Component {
-  state = {
-    clicks: [],
-    clickCount: 0,
-    wins: 0,
-    losses: 0,
-    highScore: 0,
-    Helmets,
-    results: "rules"
-  };
-  handleDivClick = (id) => {
+    
+    // Setting this.state.matches to the matches json array
+    state = {
+        matches,
+        correctGuesses,
+        bestScore,
+        clickMessage
+    };
 
-    let clickArr = this.state.clicks
-    let { highScore, clickCount } = this.state
+    setClicked = id => {
 
-    console.log(clickArr)
+        // Make a copy of the state matches array to work with
+        const matches = this.state.matches;
 
-    if (clickArr.indexOf(id) > -1) {
-     
-      this.setState({ clicks: [], clickCount: 0, losses: this.state.losses + 1,results: "loss" })
+        // Filter for the clicked match
+        const clickedMatch = matches.filter(match => match.id === id);
 
+        // If the matched image's clicked value is already true, 
+        // do the game over actions
+        if (clickedMatch[0].clicked){
 
+            console.log ("Correct Guesses: " + correctGuesses);
+            console.log ("Best Score: " + bestScore);
 
-    } else {
+            correctGuesses = 0;
+            clickMessage = "Bummer! You already clicked on this one."
 
-      clickCount++
+            for (let i = 0 ; i < matches.length ; i++){
+                matches[i].clicked = false;
+            }
 
-      clickArr.push(id)
-      this.setState({ clicks: clickArr, clickCount: clickCount })
+            this.setState({clickMessage});
+            this.setState({ correctGuesses });
+            this.setState({matches});
 
+        // Otherwise, if clicked = false, and the user hasn't finished
+        } else if (correctGuesses < 8) {
 
+            // Set its value to true
+            clickedMatch[0].clicked = true;
 
-      if (clickCount > highScore) {
-        this.setState({ highScore: clickCount })
-      }
+            // increment the appropriate counter
+            correctGuesses++;
+            
+            clickMessage = "Great! You haven't click on that one yet! Keep going!";
 
-      if(clickCount % Helmets.length === 0){
-        this.setState({clicks:[], wins: this.state.wins + 1, results: "win" })
-      }else{
-        this.setState({results: "rules"})
-      }
+            if (correctGuesses > bestScore){
+                bestScore = correctGuesses;
+                this.setState({ bestScore });
+            }
 
-    }
+            // Shuffle the array to be rendered in a random order
+            matches.sort(function(a, b){return 0.5 - Math.random()});
 
-    this.setState({ Helmets: shuffleArray(Helmets) })
+            // Set this.state.matches equal to the new matches array
+            this.setState({ matches });
+            this.setState({correctGuesses});
+            this.setState({clickMessage});
+        } else {
 
-  };
-  render() {
-   
-    return (
+            // Set its value to true
+            clickedMatch[0].clicked = true;
 
-      <div>
+            // restart the guess counter
+            correctGuesses = 0;
 
-        <Header clicks={this.state.clickCount} highScore={this.state.highScore} wins={this.state.wins} losses={this.state.losses} />
+            // Egg on the user to play again
+            clickMessage = "WOW!!! You got ALL of them!!! Now, let's see if you can do it again!";
+            bestScore = 9;
+            this.setState({ bestScore });
+            
+            for (let i = 0 ; i < matches.length ; i++){
+                matches[i].clicked = false;
+            }
 
-        <GameBoard Helmets={this.state.Helmets} handleDivClick={this.handleDivClick} />
+            // Shuffle the array to be rendered in a random order
+            matches.sort(function(a, b){return 0.5 - Math.random()});
 
-        <ResultPanel display={this.state.results} />
+            // Set this.state.matches equal to the new matches array
+            this.setState({ matches });
+            this.setState({correctGuesses});
+            this.setState({clickMessage});
+
+        }
+    };
+
+    render() {
+        return (
+            <Wrapper>
+                <Title>Clickity Clack NFL Team Game</Title>
         
-      </div>
+                <h3 className="scoreSummary">
+                    {this.state.clickMessage}
+                </h3>
+                
+                <h3 className="scoreSummary card-header">
+                    Correct Guesses: {this.state.correctGuesses} 
+                    <br />
+                    Best Score: {this.state.bestScore} 
+                </h3>
+                <div className="container">
+                <div className="row">
+                {this.state.matches.map(match => (
+                    <MatchCard
+                        setClicked={this.setClicked}
+                        id={match.id}
+                        key={match.id}
+                        image={match.image}
+                    />
+                ))}
+                </div>
+                </div>
 
-
-    );
-  }
-
-};
+            </Wrapper>
+        );
+    }
+}
 
 export default App;
