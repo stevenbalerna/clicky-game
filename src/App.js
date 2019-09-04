@@ -35,7 +35,7 @@ class App extends Component {
             console.log ("Best Score: " + bestScore);
 
             correctGuesses = 0;
-            clickMessage = "Bummer! You already clicked on this one."
+            clickMessage = "Sorry! You already clicked this team!."
 
             for (let i = 0 ; i < matches.length ; i++){
                 matches[i].clicked = false;
@@ -46,7 +46,7 @@ class App extends Component {
             this.setState({matches});
 
         // Otherwise, if clicked = false, and the user hasn't finished
-        } else if (correctGuesses < 8) {
+        } else if (correctGuesses < 11) {
 
             // Set its value to true
             clickedMatch[0].clicked = true;
@@ -54,7 +54,7 @@ class App extends Component {
             // increment the appropriate counter
             correctGuesses++;
             
-            clickMessage = "Great! You haven't click on that one yet! Keep going!";
+            clickMessage = "Good guess! You haven't click on that one yet! Keep going!";
 
             if (correctGuesses > bestScore){
                 bestScore = correctGuesses;
@@ -78,7 +78,7 @@ class App extends Component {
 
             // Egg on the user to play again
             clickMessage = "WOW!!! You got ALL of them!!! Now, let's see if you can do it again!";
-            bestScore = 9;
+            bestScore = 12;
             this.setState({ bestScore });
             
             for (let i = 0 ; i < matches.length ; i++){
@@ -99,7 +99,7 @@ class App extends Component {
     render() {
         return (
             <Wrapper>
-                <Title>Clickity Clack NFL Team Game</Title>
+                <Title>Clicky NFL Team Guessing Game</Title>
         
                 <h3 className="scoreSummary">
                     {this.state.clickMessage}
