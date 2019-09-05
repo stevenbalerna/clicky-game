@@ -57,5 +57,15 @@
         "id": 12,
         "name": "rams",
         "image": "/images/helmets/rams.png"
+    },
+    {
+        "id": 13,
+        "name": "jags",
+        "image": "/images/helmets/jags.jpeg"
+    },
+    {
+        "id": 14,
+        "name": "packers",
+        "image": "/images/helmets/rams.png"
     }
 ]

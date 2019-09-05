@@ -46,7 +46,7 @@ class App extends Component {
             this.setState({matches});
 
         // Otherwise, if clicked = false, and the user hasn't finished
-        } else if (correctGuesses < 11) {
+        } else if (correctGuesses < 13) {
 
             // Set its value to true
             clickedMatch[0].clicked = true;
@@ -78,7 +78,7 @@ class App extends Component {
 
             // Egg on the user to play again
             clickMessage = "WOW!!! You got ALL of them!!! Now, let's see if you can do it again!";
-            bestScore = 12;
+            bestScore = 14;
             this.setState({ bestScore });
             
             for (let i = 0 ; i < matches.length ; i++){
