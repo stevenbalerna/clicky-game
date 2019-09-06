@@ -1,71 +1,71 @@
 [{
         "id": 1,
         "name": "bills",
-        "image": "/images/helmets/bills.png"
+        "image": "./images/helmets/bills.png"
     },
     {
         "id": 2,
         "name": "cowboys",
-        "image": "/images/helmets/cowboys.jpeg"
+        "image": "./images/helmets/cowboys.jpeg"
     },
     {
         "id": 3,
         "name": "eagles",
-        "image": "/images/helmets/eagles.png"
+        "image": "./images/helmets/eagles.png"
     },
     {
         "id": 4,
         "name": "panthers",
-        "image": "/images/helmets/panthers.jpeg"
+        "image": "./images/helmets/panthers.jpeg"
     },
     {
         "id": 5,
         "name": "patriots",
-        "image": "/images/helmets/pats.png"
+        "image": "./images/helmets/pats.png"
     },
     {
         "id": 6,
         "name": "raiders",
-        "image": "/images/helmets/raiders.png"
+        "image": "./images/helmets/raiders.png"
     },
     {
         "id": 7,
         "name": "ravens",
-        "image": "/images/helmets/ravens.png"
+        "image": "./images/helmets/ravens.png"
     },
     {
         "id": 8,
         "name": "saints",
-        "image": "/images/helmets/saints.jpeg"
+        "image": "./images/helmets/saints.jpeg"
     },
     {
         "id": 9,
         "name": "seahawks",
-        "image": "/images/helmets/seahawks.jpeg"
+        "image": "./images/helmets/seahawks.jpeg"
     },
     {
         "id": 10,
         "name": "49ers",
-        "image": "/images/helmets/49ers.jpeg"
+        "image": "./images/helmets/49ers.jpeg"
     },
     {
         "id": 11,
         "name": "broncos",
-        "image": "/images/helmets/broncos.jpeg"
+        "image": "./images/helmets/broncos.jpeg"
     },
     {
         "id": 12,
         "name": "rams",
-        "image": "/images/helmets/rams.png"
+        "image": "./images/helmets/rams.png"
     },
     {
         "id": 13,
         "name": "jags",
-        "image": "/images/helmets/jags.jpeg"
+        "image": "./images/helmets/jags.jpeg"
     },
     {
         "id": 14,
         "name": "packers",
-        "image": "/images/helmets/packers.png"
+        "image": "./images/helmets/packers.png"
     }
 ]
