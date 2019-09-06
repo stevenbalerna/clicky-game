@@ -46,7 +46,7 @@
     {
         "id": 10,
         "name": "49ers",
-        "image": "./images/helmets/49ers.jpeg"
+        "image": "./images/helmets/49ers.jpeg" 
     },
     {
         "id": 11,
